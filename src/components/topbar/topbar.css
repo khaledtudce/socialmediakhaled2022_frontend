@@ -1,0 +1,85 @@
+.container{
+    height: 50px;
+    width: 100%;
+    background-color: rgb(29, 100, 231);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+.left{
+    flex: 2;
+    display: flex;
+    justify-content: center;
+}
+.leftLogo{
+    color: white;
+    font-size: 30px;
+    font-weight: 600;
+}
+.middle{
+    flex: 3.5;
+}
+.inputSearch{
+    height: 25px;
+    width: 90%;
+    border-radius: 10px;
+    border-style: none;
+    margin: 0px 10px;
+    padding: 5px;
+}
+.inputSearch:focus{
+    outline: none;
+}
+.right{
+    flex: 3;
+    display: flex;
+    align-items: center;
+}
+.pageLinks{
+    flex: 2.5;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.pageLink{
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+}
+.iconLinks{
+    flex: 1.5;
+    display: flex;
+    margin: 0 50px;
+    justify-content: space-between;
+}
+.iconLink{
+    color: white;
+    cursor: pointer;
+    position: relative;
+}
+.iconLinkBadge{
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: -5px;
+    right: -5px;
+}
+.profileLink{
+    flex: 1;
+}
+.profileLinkImg{
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    margin-top: 5px;
+    cursor: pointer;
+}
