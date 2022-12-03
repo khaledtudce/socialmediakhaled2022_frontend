@@ -2,3 +2,57 @@
     flex: 5;
     border: 1px solid rgb(25, 0, 255);
 }
+.feedWrapper{
+    margin: 10px;
+}
+.postItem{
+    width: 97%;
+    background-color: rgb(235, 229, 229);
+    border-radius: 10px;
+    margin: 20px 10px;
+}
+.postItemUserInfo{
+    display: flex;
+    align-items: center;
+}
+.postImg{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 10px;
+}
+.postUserId{
+    font-size: 15px;
+    font-weight: 500;
+}
+.postTimeAgo{
+    margin-left: 10px;
+    font-size: 12px;
+    font-weight: 300;
+}
+.postStatusText{
+    font-size: 20px;
+    margin-left: 15px;
+    font-weight: 400;
+}
+.postItemImg{
+    width: 95%;
+    margin: 15px;
+}
+.postLikeComment{
+    display: flex;
+    justify-content: space-between;
+}
+.postLike{
+    margin: 0 0 15px 15px;
+    display: flex;
+    align-items: center;
+}
+.postNumberLike{
+    margin-left: 5px;
+    font-size: 15px;
+}
+.postComment{
+    margin: 0 15px 15px 0;
+}
