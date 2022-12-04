@@ -2,6 +2,14 @@
     flex: 5;
     border: 1px solid rgb(25, 0, 255);
 }
+.sharePost{
+    width: 94%;
+    background-color: rgb(240, 241, 231);
+    border-radius: 10px;
+    margin: 20px;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 16px -8px rgba(0,0,0,0.68); 
+    box-shadow: 0px 10px 13px -7px #000000, 0px 0px 16px -8px rgba(0,0,0,0.68);
+}
 .feedWrapper{
     margin: 10px;
 }
@@ -10,6 +18,8 @@
     background-color: rgb(235, 229, 229);
     border-radius: 10px;
     margin: 20px 10px;
+    -webkit-box-shadow: 0px 10px 13px -7px #000000, 0px 0px 16px -8px rgba(0,0,0,0.68); 
+    box-shadow: 0px 10px 13px -7px #000000, 0px 0px 16px -8px rgba(0,0,0,0.68);
 }
 .postItemUserInfo{
     display: flex;

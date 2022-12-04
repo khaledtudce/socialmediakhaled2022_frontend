@@ -1,0 +1,39 @@
+.postShareFeed{
+    min-height: 100px;
+}
+.postShareStatus{
+    display: flex;
+    align-items: center;
+}
+.postShareStatusImg{
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    margin: 15px;
+}
+.postShareStatus{
+    font-size: 20px;
+    font-weight: 400;
+}
+.hrBar{
+    margin: 0 20px;
+}
+.postShareButtons{
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    justify-content: space-between;
+}
+.postShareButtonItem{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.shareButton{
+    background-color: green;
+    border-radius: 10%;
+    border-style: none;
+    padding: 10px;
+    cursor: pointer;
+}
