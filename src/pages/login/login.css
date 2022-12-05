@@ -1,0 +1,71 @@
+.loginContainer{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loginWrapper{
+    width: 70%;
+    height: 70%;
+    display: flex;
+}
+.loginTextBlock, .loginInputBlock{
+    flex: 1;
+    border: 1px solid red;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loginLogo{
+    font-size: 50px;
+    font-weight: 600;
+    color: rgb(29, 100, 231);
+}
+.loginText{
+    font-size: 20px;
+    color: rgb(29, 100, 231);
+}
+.loginInputBox{
+    height: 280px;
+    width: 100%;
+    background-color: rgb(227, 233, 227);
+    border-radius: 5px;
+}
+.loginInput{
+    margin: 10px 10px;
+    width: 90%;
+    border-radius: 5px;
+    padding: 10px;
+    border: none;
+}
+.inputButton{
+    background-color: rgb(29, 100, 231);
+    margin: 10px 10px;
+    width: 94%;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+.forgotPasswordText{
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    color: rgb(29, 100, 231);
+    cursor: pointer;
+}
+.createNewAccountButton{
+    background-color: rgb(26, 224, 149);
+    width: 60%;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    font-weight: 600;
+    border: none;
+    margin-left: 20%;
+    cursor: pointer;
+}
