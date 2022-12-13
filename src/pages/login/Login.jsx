@@ -8,6 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const handleClick = async (e) => {
     setLoading(true);
+    setError(false);
   };
 
   return (
