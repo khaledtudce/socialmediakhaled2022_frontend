@@ -15,7 +15,9 @@ const Feed = () => {
             <span className="postUserId">genesisreza</span>
             <span className="postTimeAgo">1 hour ago</span>
           </div>
-          <div className="postStatusText">They are busy at studying</div>
+          <div className="postStatusText">
+            They are busy at studying (Changed here)
+          </div>
           <img src="/assets/post/6.jpeg" alt="" className="postItemImg" />
           <div className="postLikeComment">
             <div className="postLike">
