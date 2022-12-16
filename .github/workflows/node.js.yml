@@ -45,7 +45,7 @@ jobs:
               sudo npm install -g pm2
               cd ~/CICD/socialmediakhaled2022
               sudo git pull origin master
-              sudo npm install
+              sudo npm install --force
               sudo npm run build
               sudo pm2 restart api
             
