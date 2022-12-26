@@ -1,6 +1,5 @@
 .rightbarContainer{
     flex: 3;
-    border: 1px solid rgb(255, 0, 179);
 }
 .birthdayNotification{
     display: flex;
@@ -52,4 +51,44 @@
 .rightbarOnlineName{
     font-weight: 400;
     margin-top: 10px;
+}
+.homeRightbar{}
+.profileRightbarContainer{
+    display: flex;
+    flex-direction: column;
+}
+.profileUserInformation{
+    display: flex;
+    flex-direction: column;
+}
+.profileUserHeadline{
+    margin: 15px;
+    font-size: 20px;
+    font-weight: 600;
+}
+.profileUserItem{
+    margin: 3px 15px;
+    font-size: 20px;
+    font-weight: 400;
+}
+.profileUserFriends{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.profileUserFriend{
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+}
+.profileUserFriendImg{
+    width: 80px;
+    height: 80px;
+    border-radius: 5px;
+    object-fit: cover;
+    margin-bottom: -65px;
+}
+.profileUserName{
+   font-size: 15px;
+   font-weight: 500;
 }

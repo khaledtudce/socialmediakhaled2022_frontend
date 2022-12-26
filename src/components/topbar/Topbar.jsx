@@ -40,7 +40,13 @@ const Topbar = () => {
           </div>
         </div>
         <div className="profileLink">
-          <img className="profileLinkImg" src="/assets/person/2.jpeg" alt="" />
+          <Link to="/timeline" style={{ textDecoration: "none" }}>
+            <img
+              className="profileLinkImg"
+              src="/assets/person/2.jpeg"
+              alt=""
+            />
+          </Link>
         </div>
       </div>
     </div>
