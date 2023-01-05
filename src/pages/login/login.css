@@ -12,7 +12,6 @@
 }
 .loginTextBlock, .loginInputBlock{
     flex: 1;
-    border: 1px solid red;
     flex-direction: column;
     display: flex;
     align-items: flex-start;

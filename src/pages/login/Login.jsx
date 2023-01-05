@@ -1,14 +1,26 @@
-import { useState } from "react";
+import axios from "axios";
+import { useContext, useState } from "react";
 import "./login.css";
+import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const { isFetching, error, dispatch } = useContext(AuthContext);
+
   const handleClick = async (e) => {
-    setLoading(true);
-    setError(false);
+    e.preventDefault();
+    dispatch({ type: "LOGIN_START" });
+    try {
+      const res = await axios.post("/auth/login", {
+        email: email,
+        password: password,
+      });
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+    } catch (error) {
+      dispatch({ type: "LOGIN_FAILURE", payload: error });
+    }
   };
 
   return (
@@ -25,9 +37,9 @@ const Login = () => {
             <input
               className="loginInput"
               type="text"
-              placeholder="username"
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
+              placeholder="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               className="loginInput"
@@ -39,10 +51,10 @@ const Login = () => {
             <button
               className="inputButton"
               data-testid="loginButton"
-              disabled={!user || !password}
+              disabled={!email || !password}
               onClick={handleClick}
             >
-              {loading ? "Please wait" : "Login"}
+              {isFetching ? "Please wait" : "Login"}
             </button>
             <span className="forgotPasswordText">Forgot Password?</span>
             <button className="createNewAccountButton">

@@ -12,7 +12,6 @@
 }
 .registerTextBlock, .registerInputBlock{
     flex: 1;
-    border: 1px solid red;
     flex-direction: column;
     display: flex;
     align-items: flex-start;
@@ -28,7 +27,7 @@
     color: rgb(29, 100, 231);
 }
 .registerInputBox{
-    height: 360px;
+    height: 410px;
     width: 100%;
     background-color: rgb(227, 233, 227);
     border-radius: 5px;
@@ -68,4 +67,12 @@
     border: none;
     margin-left: 20%;
     cursor: pointer;
+}
+.successLabel{
+    margin: 10px;
+    color: greenyellow;
+}
+.errorLabel{
+    margin: 10px;
+    color: red;
 }

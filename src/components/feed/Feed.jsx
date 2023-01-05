@@ -11,14 +11,14 @@ const Feed = () => {
       <div className="feedWrapper">
         <div className="postItem">
           <div className="postItemUserInfo">
-            <img src="/assets/person/4.jpeg" alt="" className="postImg" />
+            <img src="/assets/person/5.jpeg" alt="" className="postImg" />
             <span className="postUserId">genesisreza</span>
             <span className="postTimeAgo">1 hour ago</span>
           </div>
           <div className="postStatusText">
             They are busy at studying (Changed here)
           </div>
-          <img src="/assets/post/6.jpeg" alt="" className="postItemImg" />
+          <img src="/assets/post/4.jpeg" alt="" className="postItemImg" />
           <div className="postLikeComment">
             <div className="postLike">
               <Favorite style={{ color: "red" }} />
