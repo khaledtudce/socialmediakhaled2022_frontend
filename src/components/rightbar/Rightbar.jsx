@@ -2,6 +2,7 @@ import { CardGiftcard } from "@material-ui/icons";
 import "./rightbar.css";
 
 const Rightbar = ({ user }) => {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   const HomeRightbar = () => {
     return (
       <>
@@ -17,7 +18,7 @@ const Rightbar = ({ user }) => {
             <span className="rightbarOnlineFriendTitle">Online Friends</span>
             <div className="rightbarOnlineFriendItem">
               <img
-                src="/assets/person/2.jpeg"
+                src={PUBLIC_FOLDER + "person/1.jpeg"}
                 alt=""
                 className="rightbarOnlineFriendImg"
               />
@@ -26,7 +27,7 @@ const Rightbar = ({ user }) => {
             </div>
             <div className="rightbarOnlineFriendItem">
               <img
-                src="/assets/person/2.jpeg"
+                src={PUBLIC_FOLDER + "person/2.jpeg"}
                 alt=""
                 className="rightbarOnlineFriendImg"
               />
@@ -35,7 +36,7 @@ const Rightbar = ({ user }) => {
             </div>
             <div className="rightbarOnlineFriendItem">
               <img
-                src="/assets/person/2.jpeg"
+                src={PUBLIC_FOLDER + "person/3.jpeg"}
                 alt=""
                 className="rightbarOnlineFriendImg"
               />
@@ -44,7 +45,7 @@ const Rightbar = ({ user }) => {
             </div>
             <div className="rightbarOnlineFriendItem">
               <img
-                src="/assets/person/2.jpeg"
+                src={PUBLIC_FOLDER + "person/4.jpeg"}
                 alt=""
                 className="rightbarOnlineFriendImg"
               />
@@ -77,7 +78,7 @@ const Rightbar = ({ user }) => {
           <div className="profileUserFriends">
             <div className="profileUserFriend">
               <img
-                src="/assets/person/7.jpeg"
+                src={PUBLIC_FOLDER + "person/1.jpeg"}
                 alt=""
                 className="profileUserFriendImg"
               />
@@ -85,7 +86,7 @@ const Rightbar = ({ user }) => {
             </div>
             <div className="profileUserFriend">
               <img
-                src="/assets/person/5.jpeg"
+                src={PUBLIC_FOLDER + "person/2.jpeg"}
                 alt=""
                 className="profileUserFriendImg"
               />
@@ -93,7 +94,7 @@ const Rightbar = ({ user }) => {
             </div>
             <div className="profileUserFriend">
               <img
-                src="/assets/person/1.jpeg"
+                src={PUBLIC_FOLDER + "person/3.jpeg"}
                 alt=""
                 className="profileUserFriendImg"
               />
@@ -101,7 +102,7 @@ const Rightbar = ({ user }) => {
             </div>
             <div className="profileUserFriend">
               <img
-                src="/assets/person/3.jpeg"
+                src={PUBLIC_FOLDER + "person/4.jpeg"}
                 alt=""
                 className="profileUserFriendImg"
               />
@@ -109,7 +110,7 @@ const Rightbar = ({ user }) => {
             </div>
             <div className="profileUserFriend">
               <img
-                src="/assets/person/4.jpeg"
+                src={PUBLIC_FOLDER + "person/5.jpeg"}
                 alt=""
                 className="profileUserFriendImg"
               />
@@ -117,7 +118,7 @@ const Rightbar = ({ user }) => {
             </div>
             <div className="profileUserFriend">
               <img
-                src="/assets/person/8.jpeg"
+                src={PUBLIC_FOLDER + "person/6.jpeg"}
                 alt=""
                 className="profileUserFriendImg"
               />

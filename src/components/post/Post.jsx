@@ -5,6 +5,7 @@ import { useState } from "react";
 import { format } from "timeago.js";
 import "./post.css";
 import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -45,11 +46,18 @@ const Post = ({ post }) => {
     <div className="postContainer">
       <div className="postItem">
         <div className="postItemUserInfo">
-          <img
-            src={PUBLIC_FOLDER + userWhoPosted.profilePicture}
-            alt=""
-            className="postImg"
-          />
+          <Link to={"/profile/" + userWhoPosted.username}>
+            <img
+              src={
+                PUBLIC_FOLDER +
+                (userWhoPosted.profilePicture
+                  ? userWhoPosted.profilePicture
+                  : "person/noAvater.jpeg")
+              }
+              alt=""
+              className="postImg"
+            />
+          </Link>
           <span className="postUserId">{userWhoPosted?.username}</span>
           <span className="postTimeAgo">{format(post.createdAt)}</span>
         </div>

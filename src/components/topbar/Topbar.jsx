@@ -3,6 +3,7 @@ import "./topbar.css";
 import { PersonOutline, Message, NotificationsNone } from "@material-ui/icons";
 
 const Topbar = () => {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className="container">
       <div className="left">
@@ -43,7 +44,7 @@ const Topbar = () => {
           <Link to="/timeline" style={{ textDecoration: "none" }}>
             <img
               className="profileLinkImg"
-              src="/assets/person/2.jpeg"
+              src={PUBLIC_FOLDER + "person/2.jpeg"}
               alt=""
             />
           </Link>

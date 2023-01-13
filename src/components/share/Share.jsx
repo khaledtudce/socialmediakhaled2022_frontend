@@ -7,11 +7,12 @@ import {
 import "./share.css";
 
 const Share = () => {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className="postShareFeed">
       <div className="postShareStatus">
         <img
-          src="/assets/person/5.jpeg"
+          src={PUBLIC_FOLDER + "person/2.jpeg"}
           alt=""
           className="postShareStatusImg"
         />

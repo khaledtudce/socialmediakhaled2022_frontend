@@ -11,6 +11,7 @@ import {
 import "./leftbar.css";
 
 const Leftbar = () => {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <div className="leftContainer">
       <div className="leftWrapper">
@@ -53,7 +54,7 @@ const Leftbar = () => {
         <div className="leftbarFriendList">
           <img
             className="leftabarFriendImg"
-            src="/assets/person/2.jpeg"
+            src={PUBLIC_FOLDER + "person/1.jpeg"}
             alt=""
           />
           <span className="leftbarFriendItemText">Khaled Reza</span>
@@ -61,7 +62,7 @@ const Leftbar = () => {
         <div className="leftbarFriendList">
           <img
             className="leftabarFriendImg"
-            src="/assets/person/2.jpeg"
+            src={PUBLIC_FOLDER + "person/2.jpeg"}
             alt=""
           />
           <span className="leftbarFriendItemText">Ahnab Reza</span>
@@ -70,7 +71,7 @@ const Leftbar = () => {
         <div className="leftbarFriendList">
           <img
             className="leftabarFriendImg"
-            src="/assets/person/2.jpeg"
+            src={PUBLIC_FOLDER + "person/3.jpeg"}
             alt=""
           />
           <span className="leftbarFriendItemText">Kaynat Reza</span>
@@ -78,7 +79,7 @@ const Leftbar = () => {
         <div className="leftbarFriendList">
           <img
             className="leftabarFriendImg"
-            src="/assets/person/2.jpeg"
+            src={PUBLIC_FOLDER + "person/4.jpeg"}
             alt=""
           />
           <span className="leftbarFriendItemText">Sawlat Reza</span>
@@ -86,7 +87,7 @@ const Leftbar = () => {
         <div className="leftbarFriendList">
           <img
             className="leftabarFriendImg"
-            src="/assets/person/2.jpeg"
+            src={PUBLIC_FOLDER + "person/5.jpeg"}
             alt=""
           />
           <span className="leftbarFriendItemText">Mamun Reza</span>
@@ -94,7 +95,7 @@ const Leftbar = () => {
         <div className="leftbarFriendList">
           <img
             className="leftabarFriendImg"
-            src="/assets/person/2.jpeg"
+            src={PUBLIC_FOLDER + "person/6.jpeg"}
             alt=""
           />
           <span className="leftbarFriendItemText">Amma Reza</span>
@@ -102,7 +103,7 @@ const Leftbar = () => {
         <div className="leftbarFriendList">
           <img
             className="leftabarFriendImg"
-            src="/assets/person/2.jpeg"
+            src={PUBLIC_FOLDER + "person/7.jpeg"}
             alt=""
           />
           <span className="leftbarFriendItemText">Sabrina Reza</span>
@@ -110,7 +111,7 @@ const Leftbar = () => {
         <div className="leftbarFriendList">
           <img
             className="leftabarFriendImg"
-            src="/assets/person/2.jpeg"
+            src={PUBLIC_FOLDER + "person/8.jpeg"}
             alt=""
           />
           <span className="leftbarFriendItemText">Shirin Reza</span>
