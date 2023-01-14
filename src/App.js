@@ -5,6 +5,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
+import Messenger from "./pages/messenger/Messenger";
 
 function App() {
   const { user } = useContext(AuthContext);
@@ -12,13 +13,21 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/timeline" element={<Profile />} />
+          <Route path="/" element={user ? <Home /> : <Login />} />
+          <Route
+            path="/profile/:username"
+            element={user ? <Profile /> : <Login />}
+          />
+          <Route path="/messenger" element={user ? <Messenger /> : <Home />} />
           <Route
             path="/login"
             element={user ? <Navigate to="/" /> : <Login />}
           />
-          <Route path="/register" element={<Register />} />
+
+          <Route
+            path="/register"
+            element={user ? <Navigate to="/" /> : <Register />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

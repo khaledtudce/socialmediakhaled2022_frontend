@@ -13,7 +13,11 @@ const Rightbar = ({ user }) => {
               <b>Pola Folster</b> and <b>3 friends</b> have birthday today
             </span>
           </div>
-          <img src="/assets/ad.png" alt="" className="rightbarAddImg" />
+          <img
+            src={PUBLIC_FOLDER + "ad.png"}
+            alt=""
+            className="rightbarAddImg"
+          />
           <div className="rightbarOnlineFriendList">
             <span className="rightbarOnlineFriendTitle">Online Friends</span>
             <div className="rightbarOnlineFriendItem">
