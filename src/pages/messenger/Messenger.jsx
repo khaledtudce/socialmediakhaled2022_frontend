@@ -1,7 +1,59 @@
 import "./messenger.css";
+import Topbar from "./../../components/topbar/Topbar";
+import Conversation from "../../components/conversation/Conversation";
+import { useState } from "react";
+import Message from "../../components/message/Message";
+import ChatOnline from "../../components/chatonline/ChatOnline";
 
 const Messenger = () => {
-  return <div>Messenger</div>;
+  const [conversation, SetConversation] = useState([]);
+  const [currentChat, SetCurrentChat] = useState("not null");
+  const [onlineUsers, SetOnlineUsers] = useState(null);
+
+  return (
+    <>
+      <Topbar />
+      <div className="messenger">
+        <div className="chatMenu">
+          <div className="chatMenuWrapper">
+            <input className="chatMenuInput" placeholder="Search for friends" />
+            <Conversation conversaion={""} key={1} />
+          </div>
+        </div>
+        <div className="chatBox">
+          <div className="chatBoxWrapper">
+            {currentChat ? (
+              <>
+                <div className="chatBoxTop">
+                  <Message message={"m"} own={true} />
+                  <Message message={"m"} own={false} />
+                </div>
+              </>
+            ) : (
+              <span className="noConversationText">
+                Open a conversation to start a chat
+              </span>
+            )}
+          </div>
+          <div className="chatBoxBottom">
+            <textarea
+              className="chatMessageInput"
+              placeholder="write something..."
+            ></textarea>
+            <button className="chatSubmitButton">Send</button>
+          </div>
+        </div>
+        <div className="chatOnline">
+          <div className="chatOnlineWrapper">
+            <ChatOnline
+              onlineUsers={onlineUsers}
+              setCurrentChat={SetCurrentChat}
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Messenger;

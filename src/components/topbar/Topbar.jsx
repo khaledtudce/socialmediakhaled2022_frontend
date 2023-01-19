@@ -37,10 +37,12 @@ const Topbar = () => {
             <PersonOutline />
             <span className="iconLinkBadge">1</span>
           </div>
-          <div className="iconLink">
-            <Message />
-            <span className="iconLinkBadge">2</span>
-          </div>
+          <Link to="/messenger" style={{ textDecoration: "none" }}>
+            <div className="iconLink">
+              <Message />
+              <span className="iconLinkBadge">2</span>
+            </div>
+          </Link>
           <div className="iconLink">
             <NotificationsNone />
             <span className="iconLinkBadge">5</span>

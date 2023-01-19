@@ -7,6 +7,8 @@ const morgan = require("morgan");
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/users");
 const postRoute = require("./routes/post");
+const messageRoute = require("./routes/message");
+const conversationRoute = require("./routes/conversations");
 const multer = require("multer");
 const path = require("path");
 
@@ -46,6 +48,8 @@ app.post(
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
+app.use("/api/messages", messageRoute);
+app.use("/api/conversations", conversationRoute);
 
 app.get("/", (req, res) => {
   res.send("Welcome to homepage");
