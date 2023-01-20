@@ -7,7 +7,7 @@ import ChatOnline from "../../components/chatonline/ChatOnline";
 
 const Messenger = () => {
   const [conversation, SetConversation] = useState([]);
-  const [currentChat, SetCurrentChat] = useState("not null");
+  const [currentChat, SetCurrentChat] = useState(null);
   const [onlineUsers, SetOnlineUsers] = useState(null);
 
   return (
@@ -18,6 +18,7 @@ const Messenger = () => {
           <div className="chatMenuWrapper">
             <input className="chatMenuInput" placeholder="Search for friends" />
             <Conversation conversaion={""} key={1} />
+            <Conversation conversaion={""} key={2} />
           </div>
         </div>
         <div className="chatBox">
@@ -27,6 +28,7 @@ const Messenger = () => {
                 <div className="chatBoxTop">
                   <Message message={"m"} own={true} />
                   <Message message={"m"} own={false} />
+                  <Message message={"m"} own={true} />
                 </div>
               </>
             ) : (
@@ -45,6 +47,10 @@ const Messenger = () => {
         </div>
         <div className="chatOnline">
           <div className="chatOnlineWrapper">
+            <ChatOnline
+              onlineUsers={onlineUsers}
+              setCurrentChat={SetCurrentChat}
+            />
             <ChatOnline
               onlineUsers={onlineUsers}
               setCurrentChat={SetCurrentChat}
