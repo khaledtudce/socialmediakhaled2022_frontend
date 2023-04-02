@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { useEffect } from "react";
 import axios from "axios";
+import { io } from "socket.io-client";
 
 const Messenger = () => {
   const { user } = useContext(AuthContext);
@@ -15,8 +16,31 @@ const Messenger = () => {
   const [currentConversation, SetCurrentConversation] = useState(null);
   const [messages, SetMessages] = useState([]);
   const [newMessage, SetnewMessage] = useState(null);
+  const [arrivalMessage, SetArrivalMessage] = useState(null);
   const [onlineUsers, SetOnlineUsers] = useState(null);
   const scrollRef = useRef();
+  const socket = useRef();
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+    socket.current.on("getMessage", (data) => {
+      SetArrivalMessage({
+        conversationId: data.conversationId,
+        sender: data.senderId,
+        text: data.text,
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    arrivalMessage &&
+      currentConversation?.members.includes(arrivalMessage?.sender) &&
+      SetMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentConversation]);
+
+  useEffect(() => {
+    socket.current.emit("addUser", user._id);
+  }, [user]);
 
   useEffect(() => {
     const getConversations = async () => {
@@ -53,6 +77,17 @@ const Messenger = () => {
       sender: user._id,
       text: newMessage,
     };
+
+    const receiverId = currentConversation.members.find(
+      (member) => member !== user._id
+    );
+
+    socket.current.emit("sendMessage", {
+      senderId: user._id,
+      receiverId: receiverId,
+      text: message,
+    });
+
     try {
       const res = await axios.post("messages", message);
       SetMessages([...messages, res.data]);
