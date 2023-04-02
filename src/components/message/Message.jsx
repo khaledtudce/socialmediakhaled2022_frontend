@@ -10,7 +10,7 @@ const Message = ({ message, own }) => {
           src="https://i.ibb.co/DG69bQ4/2.png"
           alt=""
         />
-        <p className="messageText">Hello There</p>
+        <p className="messageText">{message.text}</p>
       </div>
       <div className="messageBottom">{format(message.createdAt)}</div>
     </div>

@@ -4,11 +4,41 @@ import Conversation from "../../components/conversation/Conversation";
 import { useState } from "react";
 import Message from "../../components/message/Message";
 import ChatOnline from "../../components/chatonline/ChatOnline";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Messenger = () => {
-  const [conversation, SetConversation] = useState([]);
-  const [currentChat, SetCurrentChat] = useState(null);
+  const { user } = useContext(AuthContext);
+  const [conversations, SetConversations] = useState([]);
+  const [currentConversation, SetCurrentConversation] = useState(null);
+  const [messages, SetMessages] = useState([]);
   const [onlineUsers, SetOnlineUsers] = useState(null);
+
+  useEffect(() => {
+    const getConversations = async () => {
+      try {
+        const res = await axios.get("/conversations/" + user._id);
+        SetConversations(res.data);
+      } catch (error) {
+        console.log("Conversation load error: " + error);
+      }
+    };
+    getConversations();
+  }, [user]);
+
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await axios.get("/messages/" + currentConversation?._id);
+        SetMessages(res.data);
+      } catch (error) {
+        console.log("Messages load error: " + error);
+      }
+    };
+    getMessages();
+  }, [currentConversation]);
 
   return (
     <>
@@ -17,18 +47,29 @@ const Messenger = () => {
         <div className="chatMenu">
           <div className="chatMenuWrapper">
             <input className="chatMenuInput" placeholder="Search for friends" />
-            <Conversation conversaion={""} key={1} />
-            <Conversation conversaion={""} key={2} />
+            {conversations.map((conversation) => (
+              <div onClick={() => SetCurrentConversation(conversation)}>
+                <Conversation
+                  conversation={conversation}
+                  currentUser={user}
+                  key={conversation._id}
+                />
+              </div>
+            ))}
           </div>
         </div>
         <div className="chatBox">
           <div className="chatBoxWrapper">
-            {currentChat ? (
+            {currentConversation ? (
               <>
                 <div className="chatBoxTop">
-                  <Message message={"m"} own={true} />
-                  <Message message={"m"} own={false} />
-                  <Message message={"m"} own={true} />
+                  {messages.map((message) => (
+                    <Message
+                      message={message}
+                      own={message.sender === user._id}
+                      key={message._id}
+                    />
+                  ))}
                 </div>
               </>
             ) : (
@@ -49,11 +90,11 @@ const Messenger = () => {
           <div className="chatOnlineWrapper">
             <ChatOnline
               onlineUsers={onlineUsers}
-              setCurrentChat={SetCurrentChat}
+              setCurrentChat={SetCurrentConversation}
             />
             <ChatOnline
               onlineUsers={onlineUsers}
-              setCurrentChat={SetCurrentChat}
+              setCurrentChat={SetCurrentConversation}
             />
           </div>
         </div>
