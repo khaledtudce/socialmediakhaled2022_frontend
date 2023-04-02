@@ -1,7 +1,7 @@
 import "./messenger.css";
 import Topbar from "./../../components/topbar/Topbar";
 import Conversation from "../../components/conversation/Conversation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Message from "../../components/message/Message";
 import ChatOnline from "../../components/chatonline/ChatOnline";
 import { useContext } from "react";
@@ -14,7 +14,9 @@ const Messenger = () => {
   const [conversations, SetConversations] = useState([]);
   const [currentConversation, SetCurrentConversation] = useState(null);
   const [messages, SetMessages] = useState([]);
+  const [newMessage, SetnewMessage] = useState(null);
   const [onlineUsers, SetOnlineUsers] = useState(null);
+  const scrollRef = useRef();
 
   useEffect(() => {
     const getConversations = async () => {
@@ -40,6 +42,24 @@ const Messenger = () => {
     getMessages();
   }, [currentConversation]);
 
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  });
+
+  const sendButtonHandler = async (e) => {
+    e.preventDefault();
+    const message = {
+      conversationId: currentConversation._id,
+      sender: user._id,
+      text: newMessage,
+    };
+    try {
+      const res = await axios.post("messages", message);
+      SetMessages([...messages, res.data]);
+      SetnewMessage("");
+    } catch (error) {}
+  };
+
   return (
     <>
       <Topbar />
@@ -64,11 +84,13 @@ const Messenger = () => {
               <>
                 <div className="chatBoxTop">
                   {messages.map((message) => (
-                    <Message
-                      message={message}
-                      own={message.sender === user._id}
-                      key={message._id}
-                    />
+                    <div ref={scrollRef} key={message._id}>
+                      <Message
+                        message={message}
+                        own={message.sender === user._id}
+                        key={message._id}
+                      />
+                    </div>
                   ))}
                 </div>
               </>
@@ -80,10 +102,17 @@ const Messenger = () => {
           </div>
           <div className="chatBoxBottom">
             <textarea
+              onChange={(e) => SetnewMessage(e.target.value)}
+              value={newMessage}
               className="chatMessageInput"
               placeholder="write something..."
             ></textarea>
-            <button className="chatSubmitButton">Send</button>
+            <button
+              className="chatSubmitButton"
+              onClick={(e) => sendButtonHandler(e)}
+            >
+              Send
+            </button>
           </div>
         </div>
         <div className="chatOnline">
