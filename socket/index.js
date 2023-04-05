@@ -5,6 +5,7 @@ const io = require("socket.io")(8900, {
 let users = [];
 
 const addUser = (userId, socketId) => {
+  // only push when userId is not exist in the list
   !users.some((user) => user.userId === userId) &&
     users.push({ userId, socketId });
 };
@@ -18,24 +19,27 @@ const getUser = (userId) => {
 };
 
 io.on("connection", (socket) => {
-  console.log("a user is connected");
+  console.log("a user connected");
 
   // when connect
   socket.on("addUser", (userId) => {
-    addUser(userId, socket.io);
+    addUser(userId, socket.id);
     io.emit("getUsers", users);
   });
 
   // send and get message
   socket.on("sendMessage", ({ senderId, receiverId, text }) => {
     const user = getUser(receiverId);
-    io.to(user.socketId).emit("getMessage", { senderId, text });
+    io.to(user.socketId).emit("getMessage", {
+      senderId,
+      text,
+    });
   });
 
   // when disconnect
   socket.on("disconnect", () => {
-    deleteUser(socket.io);
+    deleteUser(socket.id);
     io.emit("getUsers", users);
-    console.log("a user is disconnected");
+    console.log("a user disconnected");
   });
 });

@@ -15,11 +15,11 @@ const Messenger = () => {
   const [conversations, SetConversations] = useState([]);
   const [currentConversation, SetCurrentConversation] = useState(null);
   const [messages, SetMessages] = useState([]);
-  const [newMessage, SetnewMessage] = useState(null);
+  const [newMessage, SetnewMessage] = useState("");
   const [arrivalMessage, SetArrivalMessage] = useState(null);
   const [onlineUsers, SetOnlineUsers] = useState(null);
-  const scrollRef = useRef();
   const socket = useRef();
+  const scrollRef = useRef();
 
   useEffect(() => {
     socket.current = io("ws://localhost:8900");
@@ -40,7 +40,12 @@ const Messenger = () => {
 
   useEffect(() => {
     socket.current.emit("addUser", user._id);
-  }, [user]);
+    socket.current.on("getUsers", (users) => {
+      SetOnlineUsers(
+        user.followings.filter((f) => users.some((u) => u.userId === f))
+      );
+    });
+  }, [user.followings, user._id]);
 
   useEffect(() => {
     const getConversations = async () => {
@@ -85,7 +90,7 @@ const Messenger = () => {
     socket.current.emit("sendMessage", {
       senderId: user._id,
       receiverId: receiverId,
-      text: message,
+      text: newMessage,
     });
 
     try {
@@ -103,7 +108,10 @@ const Messenger = () => {
           <div className="chatMenuWrapper">
             <input className="chatMenuInput" placeholder="Search for friends" />
             {conversations.map((conversation) => (
-              <div onClick={() => SetCurrentConversation(conversation)}>
+              <div
+                onClick={() => SetCurrentConversation(conversation)}
+                key={conversation._id}
+              >
                 <Conversation
                   conversation={conversation}
                   currentUser={user}
@@ -154,10 +162,7 @@ const Messenger = () => {
           <div className="chatOnlineWrapper">
             <ChatOnline
               onlineUsers={onlineUsers}
-              setCurrentChat={SetCurrentConversation}
-            />
-            <ChatOnline
-              onlineUsers={onlineUsers}
+              currentId={user._id}
               setCurrentChat={SetCurrentConversation}
             />
           </div>
