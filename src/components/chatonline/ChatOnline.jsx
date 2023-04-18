@@ -44,7 +44,10 @@ const ChatOnline = ({ onlineUsers, currentId, setCurrentChat }) => {
           <div className="chatOnlineImgContainer">
             <img
               className="chatOnlineImg"
-              src={PUBLIC_FOLDER + "person/noAvater.jpeg"}
+              src={
+                PUBLIC_FOLDER +
+                (onlineFriend?.profilePicture || "person/noAvater.jpeg")
+              }
               alt=""
             ></img>
             <div className="chatOnlineBadge"></div>

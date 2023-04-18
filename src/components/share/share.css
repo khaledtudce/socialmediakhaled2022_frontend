@@ -1,5 +1,6 @@
 .postShareFeed{
     min-height: 100px;
+    background-color: white;
 }
 .postShareStatus{
     display: flex;
@@ -11,12 +12,26 @@
     border-radius: 50px;
     margin: 15px;
 }
-.postShareStatus{
+.postShareStatusInput{
     font-size: 20px;
     font-weight: 400;
+    border: none;
+    width: 80%;
+}
+.postShareStatusInput:focus{
+    outline: none;
 }
 .hrBar{
     margin: 0 20px;
+}
+.shareImgContainer{
+    padding: 10px;
+    position: relative;
+}
+.shareImg{
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
 }
 .postShareButtons{
     display: flex; 
@@ -29,6 +44,14 @@
     align-items: center;
     margin-bottom: 10px;
     cursor: pointer;
+}
+.shareIcon{
+    margin-right: 5px;
+    font-size: 18px;
+}
+.shareOptionText{
+    font-size: 18px;
+    font-weight: 600;
 }
 .shareButton{
     background-color: green;
