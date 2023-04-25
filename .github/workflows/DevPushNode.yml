@@ -1,4 +1,3 @@
-
 name: Node.js CI
 
 on:
@@ -6,7 +5,7 @@ on:
     branches: [master]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,28 +13,35 @@ jobs:
 
     - name: Install dependencies
       run: |
-         npm install --save --legacy-peer-deps
+        npm install
 
     - name: Build
       run: |
         npm run build
 
-    - name: Run a multi-line script
-      run: |
-        mkdir ../build
-        cp -TR . ../build
-        tar -xvf deploy.tar ../build/
-        cd /home/ubuntu/destination/folder/
-        tar -xvf deploy.tar
-    - name: copy file via ssh password
+    - name: Deploy to EC2 instance
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.HOST }}
         username:  ${{ secrets.USER }}
         key:  ${{ secrets.KEY }}
         port:  ${{ secrets.PORT }}
-        source: "deploy.tar"
-        target: "destination/folder"
-    - name: Extract
-      run: |
-        tar -xvf deploy.tar
+        source: build/
+        target: /home/ubuntu/deploy/
+
+    - name: Extract and deploy Nginx
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username:  ${{ secrets.USER }}
+        key:  ${{ secrets.KEY }}
+        port:  ${{ secrets.PORT }}
+        script: |
+          cd /home/ubuntu/deploy/
+          mkdir build
+          cp -TR . build/
+          tar -xvf build/deploy.tar -C /var/www/html/
+          sudo apt-get update
+          sudo apt-get install -y nginx
+          sudo systemctl start nginx
+          sudo systemctl enable nginx
