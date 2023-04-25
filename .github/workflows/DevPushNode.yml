@@ -1,46 +1,30 @@
-name: CICD for Youtube
+name: Node.js CI
 
 on:
   push:
-    branches:
-        - master
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Use node js
-        uses: actions/setup-node@v3
-        with:
-         node-version: ${{ matrix.node-version }}
-      - name: npm install and build
-        run: |
-          npm install --save --legacy-peer-deps
-          npm run build
-        env: 
-          CI: true   
+    - uses: actions/checkout@v2
 
+    - name: Install dependencies
+      run: |
+         npm install --save --legacy-peer-deps
 
-  depoly:
-    needs: [build]
-    runs-on: ubuntu-latest
+    - name: Build
+      run: |
+        npm run build
 
-    steps:
-     - name: SSH deploy
-       uses: appleboy/ssh-action@master
-       with:
-          host: ${{ secrets.HOST }}
-          username:  ${{ secrets.USER }}
-          key:  ${{ secrets.KEY }}
-          port:  ${{ secrets.PORT }}
-          script: |             
-            
-               git pull origin master
-               npm install --save --legacy-peer-deps
-               npm run build
-            
+    - name: Deploy to EC2 instance
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username:  ${{ secrets.USER }}
+        key:  ${{ secrets.KEY }}
+        port:  ${{ secrets.PORT }}
+        source: build/
+        target: /var/www/html/
