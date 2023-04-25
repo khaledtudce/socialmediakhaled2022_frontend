@@ -24,6 +24,7 @@ jobs:
         mkdir ../build
         cp -TR . ../build
         tar -cvf deploy.tar ../build/
+        cd /home/ubuntu/destination/folder/
         tar -xvf deploy.tar
     - name: copy file via ssh password
       uses: appleboy/scp-action@master
