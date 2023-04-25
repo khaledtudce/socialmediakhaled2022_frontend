@@ -1,5 +1,4 @@
 import {
-  AddPhotoAlternate,
   Cancel,
   Label,
   LocationOn,
