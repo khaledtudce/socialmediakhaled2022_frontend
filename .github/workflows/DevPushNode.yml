@@ -34,3 +34,6 @@ jobs:
         port:  ${{ secrets.PORT }}
         source: "deploy.tar"
         target: "destination/folder"
+    - name: Extract
+      run: |
+        tar -xvf deploy.tar
