@@ -32,7 +32,7 @@ const Login = () => {
 
             Connect with my the world around you on Kaynat Social
 
-            Connect My firuend and the world around you on Kaynat Social
+            Edited from dev_fiv
          </div>
         </div>
         <div className="loginInputBlock">
