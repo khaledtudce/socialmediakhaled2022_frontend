@@ -29,7 +29,7 @@ const Login = () => {
         <div className="loginTextBlock">
           <div className="loginLogo">Kaynat Social</div>
           <div className="loginText">
-            Connect My firuend and the world around you on Kaynat Social
+            Connect my edited friend and the world around you on Kaynat Social
           </div>
         </div>
         <div className="loginInputBlock">
