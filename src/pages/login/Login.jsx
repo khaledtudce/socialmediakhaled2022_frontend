@@ -29,11 +29,9 @@ const Login = () => {
         <div className="loginTextBlock">
           <div className="loginLogo">Kaynat Social</div>
           <div className="loginText">
-
-            Connect with my the world around you on Kaynat Social
-
-            Edited from dev_fiv
-         </div>
+            Connect with my the world around you on Kaynat Social. Edited from
+            my dev
+          </div>
         </div>
         <div className="loginInputBlock">
           <div className="loginInputBox">
