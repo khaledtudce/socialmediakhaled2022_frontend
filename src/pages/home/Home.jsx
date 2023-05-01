@@ -10,8 +10,6 @@ const Home = () => {
       <Topbar />
       <div className="homeContainer">
         <Leftbar />
-        <h1>Test message</h1>
-        <h1>Test message1</h1>
         <Feed />
         <Rightbar />
       </div>
