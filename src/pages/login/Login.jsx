@@ -4,7 +4,7 @@ import "./login.css";
 import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
-  const PROXY = process.env.PROXY;
+  const PROXY = "http://107.20.64.240:8800/api";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
