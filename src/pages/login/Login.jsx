@@ -13,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("/auth/login", {
+      const res = await axios.post(process.env.PROXY + "/auth/login", {
         email: email,
         password: password,
       });
