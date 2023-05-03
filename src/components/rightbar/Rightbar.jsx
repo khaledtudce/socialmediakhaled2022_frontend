@@ -18,7 +18,7 @@ const Rightbar = ({ user }) => {
       const askedUserId = user?._id ? user._id : currentUser._id;
       console.log(askedUserId);
       try {
-        const res = await axios.get("/users/friend/" + askedUserId);
+        const res = await axios.get("http://107.20.64.240:8800/api/users/friend/" + askedUserId);
         setFriends(res.data);
       } catch (error) {
         console.log(error);
