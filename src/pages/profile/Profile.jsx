@@ -34,7 +34,7 @@ const Profile = () => {
         <div className="feedAndRightbarContainer">
           <div className="profileTop">
             <img
-              crossOrigin="*"
+              crossOrigin="anonymous"
               src={
                 PUBLIC_FOLDER + (user.coverPicture || "person/noAvater.jpeg")
               }

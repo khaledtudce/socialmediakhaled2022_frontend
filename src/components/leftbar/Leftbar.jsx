@@ -53,7 +53,7 @@ const Leftbar = () => {
         </div>
         <div className="leftbarFriendList">
           <img
-            crossOrigin="*"
+            crossOrigin="anonymous"
             className="leftabarFriendImg"
             src={PUBLIC_FOLDER + "person/1.jpeg"}
             alt=""
@@ -62,7 +62,7 @@ const Leftbar = () => {
         </div>
         <div className="leftbarFriendList">
           <img
-            crossOrigin="*"
+            crossOrigin="anonymous"
             className="leftabarFriendImg"
             src={PUBLIC_FOLDER + "person/2.jpeg"}
             alt=""
@@ -72,7 +72,7 @@ const Leftbar = () => {
 
         <div className="leftbarFriendList">
           <img
-            crossOrigin="*"
+            crossOrigin="anonymous"
             className="leftabarFriendImg"
             src={PUBLIC_FOLDER + "person/3.jpeg"}
             alt=""
@@ -81,7 +81,7 @@ const Leftbar = () => {
         </div>
         <div className="leftbarFriendList">
           <img
-            crossOrigin="*"
+            crossOrigin="anonymous"
             className="leftabarFriendImg"
             src={PUBLIC_FOLDER + "person/4.jpeg"}
             alt=""
@@ -90,7 +90,7 @@ const Leftbar = () => {
         </div>
         <div className="leftbarFriendList">
           <img
-            crossOrigin="*"
+            crossOrigin="anonymous"
             className="leftabarFriendImg"
             src={PUBLIC_FOLDER + "person/5.jpeg"}
             alt=""
@@ -99,7 +99,7 @@ const Leftbar = () => {
         </div>
         <div className="leftbarFriendList">
           <img
-            crossOrigin="*"
+            crossOrigin="anonymous"
             className="leftabarFriendImg"
             src={PUBLIC_FOLDER + "person/6.jpeg"}
             alt=""
@@ -108,7 +108,7 @@ const Leftbar = () => {
         </div>
         <div className="leftbarFriendList">
           <img
-            crossOrigin="*"
+            crossOrigin="anonymous"
             className="leftabarFriendImg"
             src={PUBLIC_FOLDER + "person/7.jpeg"}
             alt=""
@@ -117,7 +117,7 @@ const Leftbar = () => {
         </div>
         <div className="leftbarFriendList">
           <img
-            crossOrigin="*"
+            crossOrigin="anonymous"
             className="leftabarFriendImg"
             src={PUBLIC_FOLDER + "person/8.jpeg"}
             alt=""

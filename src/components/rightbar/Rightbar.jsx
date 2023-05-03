@@ -38,7 +38,7 @@ const Rightbar = ({ user }) => {
             </span>
           </div>
           <img
-            crossOrigin="*"
+            crossOrigin="anonymous"
             src={PUBLIC_FOLDER + "ad.png"}
             alt=""
             className="rightbarAddImg"
@@ -53,7 +53,7 @@ const Rightbar = ({ user }) => {
               >
                 <div className="rightbarOnlineFriendItem">
                   <img
-                    crossOrigin="*"
+                    crossOrigin="anonymous"
                     src={
                       PUBLIC_FOLDER +
                       (friend?.profilePicture || "person/noAvater.jpeg")
