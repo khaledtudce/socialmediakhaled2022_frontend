@@ -17,7 +17,6 @@
     "timeago.js": "^4.0.2",
     "web-vitals": "^2.1.4"
   },
-  "proxy": "http://54.146.140.24:8800/api",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -41,5 +40,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://54.146.140.24:8800"
+   }
   }
 }
