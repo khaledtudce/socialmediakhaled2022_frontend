@@ -99,7 +99,7 @@ const Messenger = () => {
     });
 
     try {
-      const res = await axios.post(REACT_APP_PROXY + "messages", message);
+      const res = await axios.post(REACT_APP_PROXY + "/messages", message);
       SetMessages([...messages, res.data]);
       SetnewMessage("");
     } catch (error) {}
