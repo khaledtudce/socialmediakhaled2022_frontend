@@ -4,7 +4,7 @@ import "./login.css";
 import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
-  const PROXY = process.env.PROXY;
+  const REACT_APP_PROXY = process.env.PROXY;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post(`${PROXY}/auth/login`, {
+      const res = await axios.post(`${REACT_APP_PROXY}/auth/login`, {
         email: email,
         password: password,
       });
