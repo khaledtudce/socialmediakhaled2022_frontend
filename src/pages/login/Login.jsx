@@ -4,7 +4,7 @@ import "./login.css";
 import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
-  const REACT_APP_PROXY = process.env.PROXY;
+  const REACT_APP_PROXY = process.env.REACT_APP_PROXY;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
