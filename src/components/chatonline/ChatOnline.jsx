@@ -6,14 +6,17 @@ const ChatOnline = ({ onlineUsers, currentId, setCurrentChat }) => {
   const [friends, setFriends] = useState([]);
   const [onlineFriends, setOnlineFriends] = useState([]);
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const REACT_APP_PROXY = process.env.REACT_APP_PROXY;
 
   useEffect(() => {
     const getFriends = async () => {
-      const res = await axios.get("/users/friend/" + currentId);
+      const res = await axios.get(
+        REACT_APP_PROXY + "/users/friend/" + currentId
+      );
       setFriends(res.data);
     };
     getFriends();
-  }, [currentId]);
+  }, [currentId, REACT_APP_PROXY]);
 
   useEffect(() => {
     setOnlineFriends(
@@ -24,7 +27,11 @@ const ChatOnline = ({ onlineUsers, currentId, setCurrentChat }) => {
   const handleChatOnclick = async (onlineFriend) => {
     try {
       const res = await axios.get(
-        "conversations/find/" + currentId + "/" + onlineFriend._id
+        REACT_APP_PROXY +
+          "conversations/find/" +
+          currentId +
+          "/" +
+          onlineFriend._id
       );
       setCurrentChat(res.data);
     } catch (error) {

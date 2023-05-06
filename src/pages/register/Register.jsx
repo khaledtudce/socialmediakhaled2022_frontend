@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./register.css";
 
 const Register = () => {
+  const REACT_APP_PROXY = process.env.REACT_APP_PROXY;
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +15,7 @@ const Register = () => {
     setSuccess(false);
     e.preventDefault();
     try {
-      const res = await axios.post("/auth/register", {
+      const res = await axios.post(REACT_APP_PROXY + "/auth/register", {
         username: username,
         email: email,
         password: password,

@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 const Post = ({ post }) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const REACT_APP_PROXY = process.env.REACT_APP_PROXY;
   const [userWhoPosted, setUserWhoPosted] = useState({});
   const [likeAmount, SetLikeAmount] = useState(post.likes.length);
   const [isLiked, SetIsLiked] = useState(false);
@@ -21,18 +22,18 @@ const Post = ({ post }) => {
   useEffect(() => {
     try {
       const fetchUser = async () => {
-        const res = await axios.get("/users/" + post.userId);
+        const res = await axios.get(REACT_APP_PROXY + "/users/" + post.userId);
         setUserWhoPosted(res.data);
       };
       fetchUser();
     } catch (error) {
       console.log("Post: Could not retrieve user information");
     }
-  }, [post.userId]);
+  }, [post.userId, REACT_APP_PROXY]);
 
   const likeHandle = async () => {
     try {
-      await axios.put("/posts/" + post._id + "/like", {
+      await axios.put(REACT_APP_PROXY + "/posts/" + post._id + "/like", {
         userId: currentUser._id,
       });
       SetLikeAmount(isLiked ? likeAmount - 1 : likeAmount + 1);

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const Rightbar = ({ user }) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const REACT_APP_PROXY = process.env.REACT_APP_PROXY;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, ditchpatch } = useContext(AuthContext);
   const [followed, setFollowed] = useState(
@@ -18,14 +19,16 @@ const Rightbar = ({ user }) => {
       const askedUserId = user?._id ? user._id : currentUser._id;
       console.log(askedUserId);
       try {
-        const res = await axios.get("/users/friend/" + askedUserId);
+        const res = await axios.get(
+          REACT_APP_PROXY + "/users/friend/" + askedUserId
+        );
         setFriends(res.data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchFriend();
-  }, [currentUser, user]);
+  }, [currentUser, user, REACT_APP_PROXY]);
 
   const HomeRightbar = () => {
     return (
@@ -75,12 +78,12 @@ const Rightbar = ({ user }) => {
       e.preventDefault();
       try {
         if (followed) {
-          await axios.put("/users/" + userId + "/unfollow", {
+          await axios.put(REACT_APP_PROXY + "/users/" + userId + "/unfollow", {
             userId: currentUser._id,
           });
           ditchpatch({ type: "UNFOLLOW", payload: userId });
         } else {
-          await axios.put("/users/" + userId + "/follow", {
+          await axios.put(REACT_APP_PROXY + "/users/" + userId + "/follow", {
             userId: currentUser._id,
           });
           ditchpatch({ type: "FOLLOW", payload: userId });
