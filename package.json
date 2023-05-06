@@ -1,6 +1,5 @@
 {
   "name": "socialmediakhaled2022",
-  "proxy": "http://54.146.140.24:8800/api", 
   "version": "0.1.0",
   "private": true,
   "dependencies": {
