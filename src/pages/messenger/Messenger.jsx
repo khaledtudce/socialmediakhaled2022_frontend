@@ -23,7 +23,7 @@ const Messenger = () => {
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://http://54.146.140.24:8900");
+    socket.current = io("ws://http://54.146.201.83:8900");
     socket.current.on("getMessage", (data) => {
       SetArrivalMessage({
         conversationId: data.conversationId,
