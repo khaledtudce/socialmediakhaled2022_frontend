@@ -6,18 +6,15 @@ import Share from "../share/Share";
 import "./feed.css";
 
 const Feed = ({ username }) => {
+  const REACT_APP_PROXY = process.env.REACT_APP_PROXY;
   const { user } = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchPost = async () => {
       const res = username
-        ? await axios.get(
-            "http://107.20.64.240:8800/api/posts/profile/" + username
-          )
-        : await axios.get(
-            "http://107.20.64.240:8800/api/posts/timeline/" + user._id
-          );
+        ? await axios.get(REACT_APP_PROXY + "/posts/profile/" + username)
+        : await axios.get(REACT_APP_PROXY + "/posts/timeline/" + user._id);
       setPosts(
         res.data.sort((p1, p2) => {
           return new Date(p2.createdAt) - new Date(p1.createdAt);
@@ -25,7 +22,7 @@ const Feed = ({ username }) => {
       );
     };
     fetchPost();
-  }, [username, user]);
+  }, [username, user, REACT_APP_PROXY]);
 
   return (
     <div className="feedContainer">

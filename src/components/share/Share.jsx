@@ -13,6 +13,7 @@ import axios from "axios";
 const Share = () => {
   const { user } = useContext(AuthContext);
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const REACT_APP_PROXY = process.env.REACT_APP_PROXY;
   const desc = useRef();
   const [file, setFile] = useState(null);
 
@@ -31,14 +32,14 @@ const Share = () => {
       newPost.img = fileName;
 
       try {
-        await axios.post("/upload", data);
+        await axios.post(REACT_APP_PROXY + "/upload", data);
       } catch (error) {
         console.log(error);
       }
     }
 
     try {
-      await axios.post("/posts/create", newPost);
+      await axios.post(REACT_APP_PROXY + "/posts/create", newPost);
       window.location.reload();
     } catch (error) {
       console.log(error);

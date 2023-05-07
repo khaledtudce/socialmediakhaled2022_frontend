@@ -10,6 +10,7 @@ import "./profile.css";
 
 const Profile = () => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const REACT_APP_PROXY = process.env.REACT_APP_PROXY;
   const location = useLocation();
   const username = location.pathname.split("/")[2];
   const [user, setUser] = useState({});
@@ -17,14 +18,16 @@ const Profile = () => {
   useEffect(() => {
     try {
       const fetchUser = async () => {
-        const res = await axios.get("/users?username=" + username);
+        const res = await axios.get(
+          REACT_APP_PROXY + "/users?username=" + username
+        );
         setUser(res.data);
       };
       fetchUser();
     } catch (error) {
       console.log("Could not retrieve user");
     }
-  }, [username]);
+  }, [username, REACT_APP_PROXY]);
 
   return (
     <>

@@ -4,6 +4,7 @@ import "./login.css";
 import { AuthContext } from "../../context/AuthContext";
 
 const Login = () => {
+  const REACT_APP_PROXY = process.env.REACT_APP_PROXY;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -13,7 +14,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("http://107.20.64.240:8800/api/auth/login", {
+      const res = await axios.post(`${REACT_APP_PROXY}/auth/login`, {
         email: email,
         password: password,
       });
@@ -30,6 +31,7 @@ const Login = () => {
           <div className="loginLogo">Kaynat Social</div>
           <div className="loginText">
             Connect my edited friend and the world around you on Kaynat Social
+            (Master) 1
           </div>
         </div>
         <div className="loginInputBlock">

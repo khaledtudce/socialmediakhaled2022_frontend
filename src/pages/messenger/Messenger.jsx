@@ -11,6 +11,7 @@ import axios from "axios";
 import { io } from "socket.io-client";
 
 const Messenger = () => {
+  const REACT_APP_PROXY = process.env.REACT_APP_PROXY;
   const { user } = useContext(AuthContext);
   const [conversations, SetConversations] = useState([]);
   const [currentConversation, SetCurrentConversation] = useState(null);
@@ -22,7 +23,7 @@ const Messenger = () => {
   const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("ws://http://54.146.201.83:8900");
     socket.current.on("getMessage", (data) => {
       SetArrivalMessage({
         conversationId: data.conversationId,
@@ -50,26 +51,30 @@ const Messenger = () => {
   useEffect(() => {
     const getConversations = async () => {
       try {
-        const res = await axios.get("/conversations/" + user._id);
+        const res = await axios.get(
+          REACT_APP_PROXY + "/conversations/" + user._id
+        );
         SetConversations(res.data);
       } catch (error) {
         console.log("Conversation load error: " + error);
       }
     };
     getConversations();
-  }, [user]);
+  }, [user, REACT_APP_PROXY]);
 
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/messages/" + currentConversation?._id);
+        const res = await axios.get(
+          REACT_APP_PROXY + "/messages/" + currentConversation?._id
+        );
         SetMessages(res.data);
       } catch (error) {
         console.log("Messages load error: " + error);
       }
     };
     getMessages();
-  }, [currentConversation]);
+  }, [currentConversation, REACT_APP_PROXY]);
 
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -94,7 +99,7 @@ const Messenger = () => {
     });
 
     try {
-      const res = await axios.post("messages", message);
+      const res = await axios.post(REACT_APP_PROXY + "/messages", message);
       SetMessages([...messages, res.data]);
       SetnewMessage("");
     } catch (error) {}
