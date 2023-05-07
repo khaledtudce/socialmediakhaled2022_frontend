@@ -1,70 +1,146 @@
-# Getting Started with Create React App
+# socialmediakhaled2022_frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a part of project of SocialMediaKhaled20222 and here are the instruction of github CI/CD pipeline and how to configure automatically deploy this React frontend part of the app to AWS EC2 instance using Ubuntu 
 
-## Available Scripts
+dev.yml file
+```sh
 
-In the project directory, you can run:
+name: dev CI
 
-### `npm start`
+on:
+  push:
+    branches: [dev]
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+    steps:
+    - uses: actions/checkout@v2
 
-### `npm test`
+    - name: Install dependencies
+      run: |
+        npm install --save --legacy-peer-deps
+        
+    - name: Build
+      run: |
+        npm run build --if-present
+        
+    - name: Deploy to EC2 instance
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOSTDEV }}
+        username:  ${{ secrets.USERDEV }}
+        key:  ${{ secrets.KEYDEV }}
+        port:  ${{ secrets.PORTDEV }}
+        source: build/
+        target: /home/ubuntu/deploy/
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    - name: Extract and deploy Nginx
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOSTDEV }}
+        username:  ${{ secrets.USERDEV }}
+        key:  ${{ secrets.KEYDEV }}
+        port:  ${{ secrets.PORTDEV }}
+        script: |
+          cd /home/ubuntu/deploy/
+          mkdir build
+          cp -TR . build/
+          tar -xvf build/deploy.tar -C /var/www/html/
+          sudo apt-get update
+          sudo apt-get install -y nginx
+          sudo systemctl start nginx
+          sudo systemctl enable nginx
+```
 
-### `npm run build`
+## CI/CD Configuration instructions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 1. create an aws instance using ubuntu and update ubuntu
+```sh
+sudo apt-get update
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. Go to the security folder 
+```sh
+cd .ssh
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. Generate key using ssh-keygen
+```sh
+ssh-keygen -t ed25519 -a 200 -C "khaledreza@gmail.com" 
+```
 
-### `npm run eject`
+### 4. Copy this private key and put it to the Github Action Secrets for KEYDEV
+```sh
+cat id_ed25519
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 5. Provide rest of the github Action secrets, HOSTDEV=public ip address of the aws instance, USERDEV=ubuntu (default), PORTDEV=22 (default)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 6. Copy id_ed25519.pub key to the authorized_keys, so that github's ssh request can be validated using this public key. Otherwise there will be handshake failure because key validation failure
+```sh
+cat id_ed25519.pub
+sudo nano authorized_key
+```
+Save it with Cntl + x, then press y and then press enter
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 7. We need to some operation only for the first time,
+```sh
+sudo apt-get install -y nginx
+sudo systemctl start nginx
+sudo systemctl enable nginx
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 8. Configure nginx,
+```sh
+cd /etc/nginx/sites-available/
+sudo nano default
+```
+Remove everything from default file and past this server block by Cntl + shift + p
+```sh
+server {
+  listen 80 default_server;
+  server_name _;
 
-## Learn More
+  # react app & front-end files
+  location / {
+   root /home/ubuntu/deploy/build/;
+   try_files $uri /index.html;
+  }
+}
+```
+Save it with Cntl + x, then press y and then press enter
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 9. Restart nginx server
+```sh
+sudo service nginx restart
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 10. Browse unsecured public ip of your aws instance, you will see only nginx page, not your application. You need to make your index.html file and every related path/folder executable by chmod +x command
+```sh
+cd /home/ubuntu/deploy/build/ # Frontend app files are here
+chmod +x index.html
+cd ..
+chmod +x build
+cd ..
+chmod +x deploy
+cd ..
+chmod +x ubuntu
+cd ..
+chmod +x home
+```
 
-### Code Splitting
+### 11. Browse the public ip of your aws instance to see your application i.e. http://54.146.201.83/, and it should show your frontend application running in AWS. Congratulation!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 12. Some useful linux command for general use,
 
-### Analyzing the Bundle Size
+```sh
+cd # will bring the location to initial place of aws
+Cntl + Delete # will delete faster
+cp -a /home/ubuntu/deploy/socket/socialmediakhaled2022_socket/. /home/ubuntu/deploy/socket/ # Copy all files of a folder to another file
+rm -R socialmediakhaled2022_socket # Remove File with folder 
+pwd # show the path of current directory
+Cntl + shift + p  # paste copied item
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
