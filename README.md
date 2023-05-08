@@ -2,7 +2,7 @@
 
 This project is a part of project of SocialMediaKhaled20222 and here are the instruction of github CI/CD pipeline and how to configure automatically deploy this React frontend part of the app to AWS EC2 instance using Ubuntu 
 
-dev.yml file
+dev.yml file on Frontend
 ```sh
 
 name: dev CI
@@ -78,7 +78,7 @@ cat id_ed25519
 
 ### 5. Provide rest of the github Action secrets, HOSTDEV=public ip address of the aws instance, USERDEV=ubuntu (default), PORTDEV=22 (default)
 
-### 6. Copy id_ed25519.pub key to the authorized_keys, so that github's ssh request can be validated using this public key. Otherwise there will be handshake failure because key validation failure
+### 6. Copy id_ed25519.pub key to the authorized_keys, so that github's ssh request can be validated using this public key. Otherwise there will be (ssh: handshake failed: ssh: unable to authenticate, attempted methods [none publickey]) because key validation failure
 ```sh
 cat id_ed25519.pub
 sudo nano authorized_key
@@ -97,7 +97,7 @@ sudo systemctl enable nginx
 cd /etc/nginx/sites-available/
 sudo nano default
 ```
-Remove everything from default file and past this server block by Cntl + shift + p
+Remove everything from default file and past this server block by Cntl + shift + v
 ```sh
 server {
   listen 80 default_server;
@@ -132,6 +132,9 @@ chmod +x home
 ```
 
 ### 11. Browse the public ip of your aws instance to see your application i.e. http://54.146.201.83/, and it should show your frontend application running in AWS. Congratulation!
+```sh
+http://54.146.201.83/
+```
 
 ### 12. Some useful linux command for general use,
 
@@ -141,6 +144,6 @@ Cntl + Delete # will delete faster
 cp -a /home/ubuntu/deploy/socket/socialmediakhaled2022_socket/. /home/ubuntu/deploy/socket/ # Copy all files of a folder to another file
 rm -R socialmediakhaled2022_socket # Remove File with folder 
 pwd # show the path of current directory
-Cntl + shift + p  # paste copied item
+Cntl + shift + v  # paste copied item
 ```
 
