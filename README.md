@@ -61,38 +61,40 @@ jobs:
 sudo apt-get update
 ```
 
-### 2. Go to the security folder 
+### 2. By default port 22 was open for ssh connection. But for nginx, open port 80 under Security of AWS instance, protocol: TCP. Clicking on Security Groups will open a window where it is possible to edit inbound rules
+
+### 3. Go to the security folder 
 ```sh
 cd .ssh
 ```
 
-### 3. Generate key using ssh-keygen
+### 4. Generate key using ssh-keygen
 ```sh
 ssh-keygen -t ed25519 -a 200 -C "khaledreza@gmail.com" 
 ```
 
-### 4. Copy this private key and put it to the Github Action Secrets for KEYDEV
+### 5. Copy this private key and put it to the Github Action Secrets for KEYDEV
 ```sh
 cat id_ed25519
 ```
 
-### 5. Provide rest of the github Action secrets, HOSTDEV=public ip address of the aws instance, USERDEV=ubuntu (default), PORTDEV=22 (default)
+### 6. Provide rest of the github Action secrets, HOSTDEV=public ip address of the aws instance, USERDEV=ubuntu (default), PORTDEV=22 (default)
 
-### 6. Copy id_ed25519.pub key to the authorized_keys, so that github's ssh request can be validated using this public key. Otherwise there will be (ssh: handshake failed: ssh: unable to authenticate, attempted methods [none publickey]) because key validation failure
+### 7. Copy id_ed25519.pub key to the authorized_keys, so that github's ssh request can be validated using this public key. Otherwise there will be (ssh: handshake failed: ssh: unable to authenticate, attempted methods [none publickey]) because key validation failure
 ```sh
 cat id_ed25519.pub
 sudo nano authorized_key
 ```
 Save it with Cntl + x, then press y and then press enter
 
-### 7. We need to some operation only for the first time,
+### 8. We need to some operation only for the first time,
 ```sh
 sudo apt-get install -y nginx
 sudo systemctl start nginx
 sudo systemctl enable nginx
 ```
 
-### 8. Configure nginx,
+### 9. Configure nginx,
 ```sh
 cd /etc/nginx/sites-available/
 sudo nano default
@@ -112,12 +114,12 @@ server {
 ```
 Save it with Cntl + x, then press y and then press enter
 
-### 9. Restart nginx server
+### 10. Restart nginx server
 ```sh
 sudo service nginx restart
 ```
 
-### 10. Browse unsecured public ip of your aws instance, you will see only nginx page, not your application. You need to make your index.html file and every related path/folder executable by chmod +x command
+### 11. Browse unsecured public ip of your aws instance, you will see only nginx page, not your application. You need to make your index.html file and every related path/folder executable by chmod +x command
 ```sh
 cd /home/ubuntu/deploy/build/ # Frontend app files are here
 chmod +x index.html
@@ -131,12 +133,12 @@ cd ..
 chmod +x home
 ```
 
-### 11. Browse the public ip of your aws instance to see your application i.e. http://54.146.201.83/, and it should show your frontend application running in AWS. Congratulation!
+### 12. Browse the public ip of your aws instance to see your application i.e. http://54.146.201.83/, and it should show your frontend application running in AWS. Congratulation!
 ```sh
 http://54.146.201.83/
 ```
 
-### 12. Some useful linux command for general use,
+### 13. Some useful linux command for general use,
 
 ```sh
 cd # will bring the location to initial place of aws
