@@ -138,15 +138,15 @@ chmod +x home
 http://54.146.201.83/
 ```
 
-### 13. 
+### 13. Need to manage .env file on AWS with following informations, this is a one time configuration (these are example ip address of public address of aws instance)
 ```sh
-Need to manage .env file on AWS with following informations, this is a one time configuration (these are example ip address of public address of aws instance)
+.env file (untraced from git)
 
 REACT_APP_PUBLIC_FOLDER=http://54.146.140.24:8800/images/
 REACT_APP_PROXY=http://54.146.140.24:8800/api
 ```
 
-### 13. Some useful linux command for general use,
+### 14. Some useful linux command for general use,
 
 ```sh
 cd # will bring the location to initial place of aws
